@@ -1,47 +1,48 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import { NavLinks } from '@/constants'
-import AuthProviders from './AuthProviders'
-import { getCurrentUser } from '@/lib/session'
-import {signOut} from 'next-auth/react'
-import ProfileMenu from './ProfileMenu'
+import Link from "next/link";
+import Image from "next/image";
+import { NavLinks } from "@/constants";
+import AuthProviders from "./AuthProviders";
+import { getCurrentUser } from "@/lib/session";
+import { signOut } from "next-auth/react";
+import ProfileMenu from "./ProfileMenu";
+import Button from "./Button";
 
 const Navbar = async () => {
   const session = await getCurrentUser();
- 
+
   return (
-  <nav className="flexBetween navbar">
-    <div className="flex-1 flexStart gap-10">
-      <Link href='/'>
-        <Image
-          src="/dribbblelogo.png"
-          width={110}
-          height={30}
-          alt='dribbble'
-        />
+    <nav className="flexBetween navbar">
+      <div className="flex-1 flexStart gap-10">
+        <Link href="/">
+          <Image
+            src="/dribbblelogo.png"
+            width={110}
+            height={30}
+            alt="dribbble"
+          />
         </Link>
-        <ul className='xl:flex hidden text-small gap-7'>
-          {NavLinks.map((link)=>(
-            <Link href = {link.href} key={link.key}>
+        <ul className="xl:flex hidden text-small gap-7">
+          {NavLinks.map((link) => (
+            <Link href={link.href} key={link.key}>
               {link.text}
             </Link>
           ))}
         </ul>
-    </div>
-    <div className='flexCenter gap-4'>
+      </div>
+      <div className="flexCenter gap-4">
         {session?.user ? (
           <>
-          <ProfileMenu session={session}/>
-            <Link href='/create-project'>
-              Share Work
+            <ProfileMenu session={session} />
+            <Link href="/create-project">
+              <Button title="Share Work" />
             </Link>
           </>
-        ):(
-          <AuthProviders/>
+        ) : (
+          <AuthProviders />
         )}
-    </div>
+      </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
