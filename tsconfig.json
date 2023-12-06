@@ -28,7 +28,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "grafbase/schema.graphqls"
+    "schema.graphqls"
   ],
   "exclude": ["node_modules"]
 }
